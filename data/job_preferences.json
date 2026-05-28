@@ -1,0 +1,28 @@
+{
+  "skills": [
+    "Azure",
+    "AKS",
+    "Kubernetes",
+    "Docker",
+    "Terraform",
+    "CI/CD",
+    "Azure DevOps",
+    "GitHub Actions",
+    "Jenkins",
+    "Linux",
+    "Monitoring",
+    "Prometheus",
+    "Grafana",
+    "Kafka",
+    "Python",
+    "Bash",
+    "PowerShell",
+    "Incident Management",
+    "SRE"
+  ],
+  "locations": ["remote", "hybrid", "toronto", "canada"],
+  "remote_preference": "remote_or_hybrid",
+  "experience_level": "mid",
+  "min_salary": 90000,
+  "work_authorization": "authorized to work"
+}

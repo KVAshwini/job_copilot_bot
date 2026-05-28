@@ -1,0 +1,16 @@
+app:
+  name: aura-job-copilot
+  local_first: true
+  human_in_the_loop: true
+
+browser_helper:
+  enabled: false
+  allow_open_url: true
+  allow_clipboard_suggestions: true
+  auto_submit_applications: false
+  bypass_captcha: false
+  automate_linkedin_indeed: false
+
+scoring:
+  rule_based_first: true
+  max_score: 100

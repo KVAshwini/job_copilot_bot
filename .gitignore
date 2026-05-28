@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+
+# Local database/runtime output
+data/aura_job_copilot.db
+data/*.db
