@@ -8,6 +8,7 @@ Long-term architecture:
 
 - `aura-interview-engine`: realtime interview assistant
 - `aura-job-copilot`: job application workflow dashboard
+- `role_workspace.py`: branch UI for role/profession planning
 - `aura-core`: future shared memory, LLM, resume, and profile module
 
 ## Features
@@ -37,6 +38,22 @@ pip install -r requirements.txt
 ```bash
 streamlit run app.py
 ```
+
+The default `app.py` dashboard remains the personal job workflow UI.
+
+For the separate role/profession planning UI, run:
+
+```bash
+streamlit run role_workspace.py --server.port 8502
+```
+
+The role workspace uses:
+
+```text
+data/role_profiles.json
+```
+
+It covers target titles, core skills, resume focus areas, screening questions, and job-search terms for multiple roles.
 
 ## Initialize Database
 

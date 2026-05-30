@@ -1,0 +1,90 @@
+[
+  {
+    "key": "devops",
+    "label": "DevOps / SRE",
+    "target_titles": ["DevOps Engineer", "SRE", "Production Support Engineer", "Cloud Operations Engineer"],
+    "core_skills": ["Azure", "AKS", "Kubernetes", "Terraform", "CI/CD", "Linux", "Monitoring", "Incident Management"],
+    "resume_focus": ["production support", "deployment reliability", "monitoring", "RCA", "automation"],
+    "screening_questions": ["How do you handle a P1 outage?", "How do you troubleshoot Kubernetes pod restarts?", "How do you improve deployment reliability?"]
+  },
+  {
+    "key": "developer",
+    "label": "Software Developer",
+    "target_titles": ["Software Developer", "Backend Developer", "Full Stack Developer", "Software Engineer"],
+    "core_skills": ["APIs", "Debugging", "System Design", "Databases", "Testing", "Version Control"],
+    "resume_focus": ["application troubleshooting", "backend services", "clean code", "testing", "release support"],
+    "screening_questions": ["How do you debug a production API issue?", "How do you approach system design?", "How do you write maintainable code?"]
+  },
+  {
+    "key": "qa",
+    "label": "QA Engineer / Test Automation",
+    "target_titles": ["QA Engineer", "Test Engineer", "SDET", "Automation Tester"],
+    "core_skills": ["Test Planning", "API Testing", "Regression Testing", "Automation", "Defect Management", "CI/CD"],
+    "resume_focus": ["test coverage", "defect triage", "release validation", "automation strategy", "quality risk"],
+    "screening_questions": ["How do you design test automation?", "How do you handle flaky tests?", "How do you decide release readiness?"]
+  },
+  {
+    "key": "data_engineer",
+    "label": "Data Engineer",
+    "target_titles": ["Data Engineer", "ETL Developer", "Analytics Engineer"],
+    "core_skills": ["SQL", "ETL", "Pipelines", "Data Quality", "Spark", "Airflow", "Warehousing"],
+    "resume_focus": ["data pipelines", "validation", "scheduling", "monitoring", "incident recovery"],
+    "screening_questions": ["How do you troubleshoot a failing data pipeline?", "How do you ensure data quality?", "How do you handle schema changes?"]
+  },
+  {
+    "key": "data_analyst",
+    "label": "Data Analyst",
+    "target_titles": ["Data Analyst", "BI Analyst", "Reporting Analyst"],
+    "core_skills": ["SQL", "Dashboards", "Metrics", "Power BI", "Tableau", "Data Validation"],
+    "resume_focus": ["reporting accuracy", "stakeholder questions", "metric definitions", "dashboard delivery"],
+    "screening_questions": ["How do you build a useful dashboard?", "What do you do when numbers look wrong?", "How do you define a metric?"]
+  },
+  {
+    "key": "business_analyst",
+    "label": "Business Analyst",
+    "target_titles": ["Business Analyst", "Systems Analyst", "Functional Analyst"],
+    "core_skills": ["Requirements", "User Stories", "Process Mapping", "Stakeholder Management", "UAT"],
+    "resume_focus": ["requirements clarity", "process understanding", "acceptance criteria", "stakeholder alignment"],
+    "screening_questions": ["How do you gather requirements?", "How do you handle scope changes?", "How do you support UAT?"]
+  },
+  {
+    "key": "project_manager",
+    "label": "Project Manager",
+    "target_titles": ["Project Manager", "Delivery Manager", "Scrum Master"],
+    "core_skills": ["Planning", "Risk Management", "Delivery Tracking", "Stakeholder Communication", "Agile"],
+    "resume_focus": ["delivery coordination", "risk tracking", "stakeholder communication", "timeline management"],
+    "screening_questions": ["How do you manage project risk?", "How do you handle delivery delays?", "How do you manage conflict between teams?"]
+  },
+  {
+    "key": "product_manager",
+    "label": "Product Manager",
+    "target_titles": ["Product Manager", "Product Owner", "Technical Product Manager"],
+    "core_skills": ["Roadmaps", "Prioritization", "Customer Discovery", "Metrics", "Backlog Management"],
+    "resume_focus": ["product outcomes", "customer impact", "prioritization", "cross-functional delivery"],
+    "screening_questions": ["How do you prioritize a backlog?", "What do you do when a feature underperforms?", "How do you define success metrics?"]
+  },
+  {
+    "key": "cybersecurity",
+    "label": "Cybersecurity Analyst",
+    "target_titles": ["Security Analyst", "Cybersecurity Analyst", "SOC Analyst"],
+    "core_skills": ["SIEM", "Incident Response", "Vulnerability Management", "Access Control", "Log Analysis"],
+    "resume_focus": ["security monitoring", "incident triage", "risk prioritization", "audit evidence"],
+    "screening_questions": ["How do you investigate a security alert?", "How do you prioritize vulnerabilities?", "How do you handle suspicious login activity?"]
+  },
+  {
+    "key": "cloud_engineer",
+    "label": "Cloud Engineer",
+    "target_titles": ["Cloud Engineer", "Azure Engineer", "Cloud Infrastructure Engineer"],
+    "core_skills": ["Azure", "AWS", "GCP", "Networking", "IAM", "Infrastructure as Code", "Monitoring"],
+    "resume_focus": ["cloud reliability", "identity", "networking", "cost control", "automation"],
+    "screening_questions": ["How do you design a secure cloud environment?", "How do you control cloud cost?", "How do you troubleshoot cloud connectivity?"]
+  },
+  {
+    "key": "database_admin",
+    "label": "Database Administrator",
+    "target_titles": ["Database Administrator", "DBA", "SQL Server DBA"],
+    "core_skills": ["SQL", "Backup and Restore", "Performance Tuning", "Replication", "Indexes", "Monitoring"],
+    "resume_focus": ["database reliability", "backup validation", "query performance", "availability"],
+    "screening_questions": ["How do you troubleshoot a slow query?", "How do you validate backups?", "How do you respond to database connection exhaustion?"]
+  }
+]
