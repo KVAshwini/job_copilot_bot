@@ -50,6 +50,17 @@ CREATE TABLE IF NOT EXISTS generated_answers (
     FOREIGN KEY(job_id) REFERENCES jobs(id)
 );
 
+CREATE TABLE IF NOT EXISTS application_packets (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    job_id INTEGER NOT NULL,
+    readiness_score INTEGER NOT NULL,
+    missing_fields TEXT NOT NULL,
+    answers_json TEXT NOT NULL,
+    manual_submit_required INTEGER NOT NULL DEFAULT 1,
+    created_at TEXT NOT NULL,
+    FOREIGN KEY(job_id) REFERENCES jobs(id)
+);
+
 CREATE TABLE IF NOT EXISTS followups (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     job_id INTEGER NOT NULL,

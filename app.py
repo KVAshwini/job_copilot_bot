@@ -3,16 +3,20 @@ from pathlib import Path
 import streamlit as st
 
 from db.database import DB_PATH, init_db, loads
+from src.apply_assistant import build_application_packet
 from src.browser_helper import clipboard_instruction, open_application_url
 from src.fit_scorer import load_preferences, score_job
 from src.job_importer import build_job_from_input
 from src.message_generator import cover_letter, email_application_message, followup_message, linkedin_message
 from src.models import APPLICATION_STATUSES, Job
 from src.resume_tailor import tailor_resume
+from src.safety import safety_summary
 from src.tracker import (
     add_job,
+    latest_application_packets,
     latest_applications,
     list_jobs,
+    save_application_packet,
     save_cover_letter,
     save_generated_answer,
     save_resume,
@@ -69,6 +73,7 @@ def main() -> None:
             "Match Score",
             "Tailor Resume",
             "Generate Messages",
+            "Apply Assistant",
             "Application Tracker",
             "Follow-ups",
             "Settings",
@@ -143,6 +148,78 @@ def main() -> None:
                 save_generated_answer(message_type, message_type, content, job.id or row["id"])
                 st.success("Saved draft.")
             st.caption(clipboard_instruction("Use the text above only after reviewing it."))
+
+    elif page == "Apply Assistant":
+        st.title("Apply Assistant")
+        st.caption("Build a manual application packet from an existing saved job. This page never submits applications.")
+        row = selected_job()
+        if row:
+            job = to_job(row)
+            common_answers = read_json(COMMON_ANSWERS, {})
+            st.subheader("Profile fields")
+            col1, col2 = st.columns(2)
+            with col1:
+                name = st.text_input("Name")
+                email = st.text_input("Email")
+            with col2:
+                phone = st.text_input("Phone")
+                location = st.text_input("Location")
+            profile_overrides = {
+                "name": name,
+                "email": email,
+                "phone": phone,
+                "location": location,
+            }
+            packet = build_application_packet(job, common_answers, profile_overrides)
+            st.metric("Readiness score", f"{packet['readiness_score']}/100")
+            if packet["missing_fields"]:
+                st.warning("Missing fields: " + ", ".join(packet["missing_fields"]))
+            else:
+                st.success("Packet has answers for the detected fields.")
+
+            st.subheader("Prepared answers")
+            for field, answer in packet["answers"].items():
+                st.text_area(field.replace("_", " ").title(), value=answer, height=90, key=f"apply_{field}")
+
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("Save application packet", type="primary"):
+                    packet_id = save_application_packet(job.id or row["id"], packet)
+                    for field, answer in packet["answers"].items():
+                        save_generated_answer("application field", field, answer, job.id or row["id"])
+                    set_application_status(row["id"], "prepared", "Application packet prepared.")
+                    st.success(f"Saved packet #{packet_id}.")
+            with col2:
+                enabled = st.checkbox("Enable browser helper", value=False)
+                use_playwright = st.checkbox("Use Playwright if installed", value=False)
+                if st.button("Open application URL"):
+                    st.info(open_application_url(row.get("url") or "", enabled=enabled, use_playwright=use_playwright))
+
+            submitted_notes = st.text_area("Manual submission notes")
+            if st.button("Mark as applied manually"):
+                set_application_status(row["id"], "applied", submitted_notes or "Submitted manually by user.")
+                st.success("Marked job as applied. Manual submission only.")
+
+            with st.expander("Safety limits"):
+                for item in safety_summary():
+                    st.write(f"- {item}")
+
+        packets = latest_application_packets()
+        if packets:
+            st.subheader("Latest saved packets")
+            display_rows = []
+            for packet_row in packets:
+                display_rows.append(
+                    {
+                        "job_id": packet_row["job_id"],
+                        "title": packet_row["title"],
+                        "company": packet_row["company"],
+                        "readiness_score": packet_row["readiness_score"],
+                        "missing_fields": ", ".join(loads(packet_row["missing_fields"], [])),
+                        "created_at": packet_row["created_at"],
+                    }
+                )
+            st.dataframe(display_rows, use_container_width=True)
 
     elif page == "Application Tracker":
         st.title("Application Tracker")

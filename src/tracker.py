@@ -104,3 +104,43 @@ def save_generated_answer(answer_type: str, question: str, answer: str, job_id: 
             (job_id, answer_type, question, answer, datetime.now().isoformat(timespec="seconds")),
         )
         conn.commit()
+
+
+def save_application_packet(job_id: int, packet: dict[str, Any], db_path: Path | None = None) -> int:
+    with (connect(db_path) if db_path else connect()) as conn:
+        cursor = conn.execute(
+            """
+            INSERT INTO application_packets
+                (job_id, readiness_score, missing_fields, answers_json, manual_submit_required, created_at)
+            VALUES (?, ?, ?, ?, ?, ?)
+            """,
+            (
+                job_id,
+                packet["readiness_score"],
+                dumps(packet["missing_fields"]),
+                dumps(packet["answers"]),
+                1 if packet.get("manual_submit_required", True) else 0,
+                datetime.now().isoformat(timespec="seconds"),
+            ),
+        )
+        conn.commit()
+        return int(cursor.lastrowid)
+
+
+def latest_application_packets(db_path: Path | None = None) -> list[dict[str, Any]]:
+    with (connect(db_path) if db_path else connect()) as conn:
+        rows = conn.execute(
+            """
+            SELECT p.id, p.job_id, j.title, j.company, p.readiness_score,
+                   p.missing_fields, p.answers_json, p.manual_submit_required, p.created_at
+            FROM application_packets p
+            JOIN jobs j ON j.id = p.job_id
+            JOIN (
+                SELECT job_id, MAX(id) AS latest_id
+                FROM application_packets
+                GROUP BY job_id
+            ) latest ON latest.latest_id = p.id
+            ORDER BY p.created_at DESC
+            """
+        ).fetchall()
+        return [row_to_dict(row) for row in rows]

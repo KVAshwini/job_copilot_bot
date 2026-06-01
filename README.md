@@ -20,6 +20,7 @@ Long-term architecture:
 - Resume tailoring suggestions from `data/master_resume.md`
 - Cover letter, recruiter message, email, and follow-up drafts
 - Common application answer library
+- Apply Assistant page for manual application packets
 - Application status tracker
 - Optional browser helper, disabled by default
 - Local-first and no paid API required
@@ -69,8 +70,15 @@ data/aura_job_copilot.db
 - Does not auto-submit applications.
 - Does not bypass CAPTCHA.
 - Does not scrape or automate LinkedIn/Indeed activity.
+- Does not mass apply or fill/submit forms automatically.
 - Does not invent fake experience.
 - Resume tailoring only suggests wording supported by `data/master_resume.md`.
+
+## Apply Assistant Spike
+
+The Apply Assistant is now part of the main job copilot dashboard. It uses saved jobs, `data/common_application_answers.json`, and optional profile fields typed in the UI to build a manual application packet.
+
+The packet includes detected application fields, prepared answers, a readiness score, and missing-field warnings. You can save the packet and mark the job as applied only after you submit it yourself.
 
 ## Optional Browser Helper
 
